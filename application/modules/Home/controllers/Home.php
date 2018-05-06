@@ -1,5 +1,5 @@
 <?php
-class Home extends CI_Controller{
+class Home extends MX_Controller{
     public function __construct()
     {
         parent::__construct();
@@ -8,6 +8,6 @@ class Home extends CI_Controller{
         $this->load->view('Home_view');
     }
     public function user(){
-
+        echo "thanhdeptrai";
     }
 }
