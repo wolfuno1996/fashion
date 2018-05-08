@@ -408,13 +408,13 @@
                         </li>
 
                         <li class="p-t-4">
-                            <a href="<?php echo base_url()."product/category/wowen-1"?>" class="s-text13">
+                            <a href="<?php echo base_url()."product/category/women"?>" class="s-text13">
                                 Women
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="<?php echo base_url()."product/category/man-2"?>" class="s-text13">
+                            <a href="<?php echo base_url()."product/category/men"?>" class="s-text13">
                                 Men
                             </a>
                         </li>
