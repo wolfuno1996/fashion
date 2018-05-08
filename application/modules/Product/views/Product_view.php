@@ -402,19 +402,19 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="#" class="s-text13 active1">
+                            <a href="<?php echo base_url()."product/category/all"?>" class="s-text13 active1">
                                 All
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13">
+                            <a href="<?php echo base_url()."product/category/wowen-1"?>" class="s-text13">
                                 Women
                             </a>
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13">
+                            <a href="<?php echo base_url()."product/category/man-2"?>" class="s-text13">
                                 Men
                             </a>
                         </li>
@@ -449,7 +449,7 @@
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" id="filter-button" onclick="filterProduct()">
                                     Filter
                                 </button>
                             </div>
@@ -854,6 +854,7 @@
 </script>
 <!--===============================================================================================-->
 <script src="<?php echo base_url()?>assets/js/main.js"></script>
+<script src="<?php echo base_url()?>assets/js/1.js"></script>
 
 </body>
 </html>
