@@ -11,17 +11,31 @@ class Product extends CI_Controller{
         $this->load->view('Product_view',$data);
     }
     public function filter_Cate($category){
+        if($category=='all'){
+            $data['product'] = $this->Product_model->getData();
+            $data['category'] = $category;
+        }
+        else{
+            $data['product'] = $this->Product_model->getDataFromCategory($category);
+            $data['category'] = $category;
+        }
 
-        $data['product'] = $this->Product_model->getDataFromCategory($category);
 
         $this->load->view('Product_view',$data);
     }
 
     public function filter_all($category, $price, $color) {
 
-        $mot = $this->input->post('1');
-        $hai = $this->input->post('2');
-        $ba = $this->input->post('3');
-
+        $price = base64_decode($price);
+        $color = base64_decode($price);
+        $price =  json_decode($price);
+        $color =  json_decode($price);
+        if($category=="all"){
+            if(count($color)<=0){
+                echo "color ko co gi";
+            }else{
+                echo $color;
+;            }
+        }
     }
 }

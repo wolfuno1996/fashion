@@ -59,5 +59,6 @@ $route['product'] = 'Product/index';
 //$route['product/category/(:any)/(:num)'] = 'Product/filter_Cate/$1/$2';
 $route['product/category/(:any)'] = 'Product/filter_Cate/$1';
 
-$route['product/category/(:any)/(:any)/(:any)'] = 'Product/filter_all/$1/$2/$3';
+$route['product/(:any)/(:any)/(:any)'] = 'Product/filter_all/$1/$2/$3';
+$route['product/category/filter'] = 'Product/filter_all';
 

@@ -3,8 +3,11 @@ function Product() {
 }
 
 function filterProduct(){
+
         var color = [];
         var price = [];
+        var category = jQuery('#category').val();
+        var BASE_URL = jQuery('#base_url').val() +'product/';
 
         $('ul.flex-w').find("input:checkbox:checked").each(function () {
             color.push($(this).attr('name'));
@@ -16,22 +19,27 @@ function filterProduct(){
         price.push(price_lower);
         price.push(price_upper);
 
-        var BASE_URL = "<?php echo base_url()?>";
-        $.ajax({
-            url : BASE_URL + 'auth/delete_user',
+        color = JSON.stringify(color);
+        price = JSON.stringify(price);
+
+
+       /* $.ajax({
+            url : BASE_URL+'category/filter',
             type: 'post',
-            data: {'rec_id' : recId },
+            data: {'color' : color },
             success: function (response){
-                try{
-                    if(response == 'true'){
-                        parent.slideUp('slow',function(){$(this).remove();});
-                    }
-                }catch(e) {
-                    alert('Exception while request..');
-                }
+                console.log('success');
             },
             error: function (xhr, text, message) {
                 console.log(message);
             }
-        });
+        });*/
+        color = btoa(color);
+        price = btoa(price);
+        console.log(color);
+        setTimeout(function () {
+            window.location.replace(BASE_URL+category+'/'+price+'/'+color);
+        },1000);
+
+
     }
