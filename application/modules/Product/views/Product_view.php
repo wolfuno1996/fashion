@@ -402,34 +402,41 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
+                            <?php if($category=='all'){?>
                             <a href="<?php echo base_url()."product/category/all"?>" class="s-text13 active1">
                                 All
                             </a>
-                        </li>
-
-                        <li class="p-t-4">
-                            <a href="<?php echo base_url()."product/category/women"?>" class="s-text13">
-                                Women
+                            <?php } ?>
+                            <?php if($category!='all'){?>
+                            <a href="<?php echo base_url()."product/category/all"?>" class="s-text13">
+                                All
                             </a>
+                            <?php } ?>
                         </li>
-
+                        <?php if(isset($total_category)){ foreach ($total_category as $each_category){  ?>
                         <li class="p-t-4">
-                            <a href="<?php echo base_url()."product/category/men"?>" class="s-text13">
-                                Men
-                            </a>
-                        </li>
+                            <?php if($category=='all'){?>
 
-                        <li class="p-t-4">
-                            <a href="#" class="s-text13">
-                                Kids
+                            <a href="<?php echo base_url() ?>product/category/<?php echo $each_category['name'] ?>" class="s-text13 ">
+                                <?php echo $each_category['name'] ?>
                             </a>
-                        </li>
+                            <?php } ?>
+                            <?php if($category!='all' && $category==$each_category['name']){?>
 
-                        <li class="p-t-4">
-                            <a href="#" class="s-text13">
-                                Accesories
-                            </a>
+                                <a href="<?php echo base_url() ?>product/category/<?php echo $each_category['name'] ?>" class="s-text13 active1">
+                                    <?php echo $each_category['name'] ?>
+                                </a>
+                            <?php } ?>
+                            <?php if($category!='all' && $category!=$each_category['name']){?>
+
+                                <a href="<?php echo base_url() ?>product/category/<?php echo $each_category['name'] ?>" class="s-text13">
+                                    <?php echo $each_category['name'] ?>
+                                </a>
+                            <?php } ?>
+
                         </li>
+                        <?php }} ?>
+
                     </ul>
 
                     <!--  -->
@@ -449,9 +456,7 @@
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" id="filter-button" onclick="filterProduct()">
-                                    Filter
-                                </button>
+
                             </div>
 
                             <div class="s-text3 p-t-10 p-b-10">
@@ -499,16 +504,22 @@
                             <li class="m-r-10">
                                 <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="Gray">
                                 <label class="color-filter color-filter7" for="color-filter7"></label>
+                                <?php if(isset($category)){ ?>
                                 <input type="hidden" id="category" value="<?php echo $category  ?>" >
+
+                                <?php } ?>
                                 <input type="hidden" id="base_url" value="<?php echo base_url()  ?>" >
                             </li>
                         </ul>
+                        <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" id="filter-button" onclick="filterProduct()">
+                            Filter
+                        </button>
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <input class="s-text7 size6 p-l-23 p-r-50" id="search-product" type="text" value="" name="search-product" placeholder="Search Products...">
 
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" id="search-button"  onclick="searchProduct()">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -539,13 +550,17 @@
 
                             </select>
                         </div>
+
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
 							Showing 1–12 of 16 results
 						</span>
-                </div>
 
+                </div>
+                <?php if(isset($key_word)){ ?>
+                <h5>The result of <span style="color: red">'<?php echo $key_word ?>'</span></h5><br>
+                <?php } ?>
                 <!-- Product -->
                 <div class="row">
                     <?php
@@ -592,10 +607,17 @@
 
 
                 <!-- Pagination -->
+                <?php if(isset($total_page)){ ?>
                 <div class="pagination flex-m flex-w p-t-26">
-                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                    <?php for($i=1;$i<=$total_page;$i++){ ?>
+                        <?php if($current_page == $i){ ?>
+                    <a href="<?php echo base_url().'product/category/'.$category.'/page-'.$i ?>" class="item-pagination flex-c-m trans-0-4 active-pagination"><?php echo $i ?></a>
+                    <?php }?>
+                        <?php if($current_page!=$i){ ?>
+                    <a href="<?php echo base_url().'product/category/'.$category.'/page-'.$i ?>" class="item-pagination flex-c-m trans-0-4"><?php echo $i ?></a>
+                        <?php }}?>
                 </div>
+                <?php }?>
             </div>
         </div>
     </div>

@@ -6,36 +6,56 @@ class Product extends CI_Controller{
         parent::__construct();
         $this->load->model('Product_model');
     }
-    public function index(){
-        $data['product'] = $this->Product_model->getData();
+    public function index($page){
+        $query = $this->Product_model->getData(1);
+        $data['product'] = $query['dulieu'];
+        $data['total_page'] = $query['total_page'];
+        $data['total_category'] = $query['$total_category'];
+        $data['category'] = 'all';
+        $data['current_page'] = $page;
+
         $this->load->view('Product_view',$data);
     }
-    public function filter_Cate($category){
+
+    public function filter_Cate($category,$page){
         if($category=='all'){
-            $data['product'] = $this->Product_model->getData();
+            $query = $this->Product_model->getData($page);
+            $data['product'] = $query['dulieu'];
+            $data['total_page'] = $query['total_page'];
             $data['category'] = $category;
+            $data['current_page'] = $page;
+            $data['total_category'] = $query['$total_category'];
         }
         else{
-            $data['product'] = $this->Product_model->getDataFromCategory($category);
+            $query = $this->Product_model->getDataFromCategory($category,$page);
+            $data['product'] = $query['dulieu'];
+            $data['total_page'] = $query['total_page'];
             $data['category'] = $category;
+            $data['current_page'] = $page;
+            $data['total_category'] = $query['$total_category'];
         }
-
-
         $this->load->view('Product_view',$data);
     }
 
     public function filter_all($category, $price, $color) {
-
-        $price = base64_decode($price);
-        $color = base64_decode($price);
-        $price =  json_decode($price);
-        $color =  json_decode($price);
-        if($category=="all"){
-            if(count($color)<=0){
-                echo "color ko co gi";
-            }else{
-                echo $color;
-;            }
+        if($color!=null){
+            $color = base64_decode($color);
+            $color =  json_decode($color);
         }
+        $price = base64_decode($price);
+        $price =  json_decode($price);
+        $data['product'] = $this->Product_model->getDataFromFilter($category, $price, $color);
+        $data['category'] = $category;
+        $this->load->view('Product_view',$data);
     }
+
+    public function searchProduct($category,$key_word){
+        $query = $this->Product_model->searchProductWithKey($category,$key_word);
+        $data['product'] = $query['dulieu'];
+        $data['key_word'] = $query['key_word'];
+        $data['category'] = $category;
+        $data['total_category'] = $query['$total_category'];
+        $this->load->view('Product_view',$data);
+    }
+
 }

@@ -88,7 +88,7 @@
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="product/category/all">Shop</a>
                         </li>
 
                         <li class="sale-noti">

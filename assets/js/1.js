@@ -7,7 +7,7 @@ function filterProduct(){
         var color = [];
         var price = [];
         var category = jQuery('#category').val();
-        var BASE_URL = jQuery('#base_url').val() +'product/';
+        var BASE_URL = jQuery('#base_url').val() +'product/' ;
 
         $('ul.flex-w').find("input:checkbox:checked").each(function () {
             color.push($(this).attr('name'));
@@ -21,25 +21,33 @@ function filterProduct(){
 
         color = JSON.stringify(color);
         price = JSON.stringify(price);
-
-
-       /* $.ajax({
-            url : BASE_URL+'category/filter',
-            type: 'post',
-            data: {'color' : color },
-            success: function (response){
-                console.log('success');
-            },
-            error: function (xhr, text, message) {
-                console.log(message);
-            }
-        });*/
-        color = btoa(color);
-        price = btoa(price);
         console.log(color);
+        console.log(price);
+
+
+        if(color.length ==0){
+            color = null;
+        }
+        else{
+            color = btoa(color);
+        }
+
+        price = btoa(price);
+
         setTimeout(function () {
             window.location.replace(BASE_URL+category+'/'+price+'/'+color);
         },1000);
+        
+}
 
+function searchProduct() {
+    var key_word = jQuery('#search-product').val();
+    var category = jQuery('#category').val();
+    var BASE_URL = jQuery('#base_url').val() +'product/category/' ;
 
-    }
+    setTimeout(function () {
+        window.location.replace(BASE_URL+category+'/search-'+key_word);
+    },1000);
+}
+    
+    
