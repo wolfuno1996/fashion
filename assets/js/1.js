@@ -1,5 +1,15 @@
-function Product() {
+function sortProductWithKey(key_word) {
+    var category = jQuery('#category').val();
+    var BASE_URL = jQuery('#base_url').val() +'product/category/' ;
+    setTimeout(function () {
+        if(key_word.value=='default-sort'){
+            window.location.replace(BASE_URL+category);
+        }
+        else{
+            window.location.replace(BASE_URL+category+'?sort='+key_word.value);
+        }
 
+    },500);
 }
 
 function filterProduct(){
@@ -49,5 +59,29 @@ function searchProduct() {
         window.location.replace(BASE_URL+category+'/search-'+key_word);
     },1000);
 }
-    
+
+jQuery(document).ready(function () {
+
+    switch(jQuery('input#sort').val()){
+            case 'default-sort':
+                htmlSort = "Default Sorting";
+                $('select#selection-sort option[value="default-sort"]').attr("selected","selected");
+                break;
+        case 'price-asc':
+            htmlSort = 'Price: low to high';
+            $('select#selection-sort option[value="price-asc"]').attr("selected","selected");
+            break;
+
+            case 'price-desc':
+            htmlSort = 'Price: high to low';
+                $('select#selection-sort option[value="price-desc"]').attr("selected","selected");
+            break;
+    }
+
+    setTimeout(function () {
+        valueSort = jQuery('input#sort').val();
+        $('#select2-selection-sort-container').html(htmlSort);
+
+    },100);
+})
     

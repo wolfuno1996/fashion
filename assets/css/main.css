@@ -2345,5 +2345,8 @@ input.num-product::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
 }
-
+.disabled{
+    pointer-events: none;
+    cursor: default;
+}
 

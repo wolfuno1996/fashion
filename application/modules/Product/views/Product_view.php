@@ -506,7 +506,9 @@
                                 <label class="color-filter color-filter7" for="color-filter7"></label>
                                 <?php if(isset($category)){ ?>
                                 <input type="hidden" id="category" value="<?php echo $category  ?>" >
-
+                                <?php } ?>
+                                <?php if(isset($sort)){ ?>
+                                <input type="hidden" id="sort" value="<?php echo $sort?>" >
                                 <?php } ?>
                                 <input type="hidden" id="base_url" value="<?php echo base_url()  ?>" >
                             </li>
@@ -529,34 +531,29 @@
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!--  -->
                 <div class="flex-sb-m flex-w p-b-35">
-                    <div class="flex-w">
+                    <div class="flex-w"> <?php if(isset($limit)){ ?>
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
-                                <option>Default Sorting</option>
-                                <option>Popularity</option>
-                                <option>Price: low to high</option>
-                                <option>Price: high to low</option>
-                            </select>
-                        </div>
 
-                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
-                                <option>Price</option>
-                                <option>$0.00 - $50.00</option>
-                                <option>$50.00 - $100.00</option>
-                                <option>$100.00 - $150.00</option>
-                                <option>$150.00 - $200.00</option>
-                                <option>$200.00+</option>
-
+                            <select class="selection-2" id="selection-sort" name="sorting" onchange="sortProductWithKey(this)">
+                                <option value="default-sort">Default Sorting</option>
+                                <option value="price-asc">Price: low to high</option>
+                                <option value="price-desc">Price: high to low</option>
                             </select>
+
+
                         </div>
+                        <?php } ?>
+                        <?php if(!isset($limit)){ ?>
+                            <h5>Filter with Price :  <span style="color: red">'<?php echo $price?>'</span> and Color : <span style="color: red">'<?php echo $color?>'</span></h5><br>
+                        <?php } ?>
+
 
                     </div>
-
+                    <?php if(isset($limit)){ ?>
                     <span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+							Showing <?php echo $limit ?> of <?php echo $total_record ?> results
 						</span>
-
+                    <?php } ?>
                 </div>
                 <?php if(isset($key_word)){ ?>
                 <h5>The result of <span style="color: red">'<?php echo $key_word ?>'</span></h5><br>
@@ -608,15 +605,28 @@
 
                 <!-- Pagination -->
                 <?php if(isset($total_page)){ ?>
+                    <?php if($sort!='default-sort') { ?>
                 <div class="pagination flex-m flex-w p-t-26">
                     <?php for($i=1;$i<=$total_page;$i++){ ?>
                         <?php if($current_page == $i){ ?>
-                    <a href="<?php echo base_url().'product/category/'.$category.'/page-'.$i ?>" class="item-pagination flex-c-m trans-0-4 active-pagination"><?php echo $i ?></a>
+                    <a href="<?php echo base_url().'product/category/'.$category.'?sort='.$sort.'&page='.$i ?>" class="item-pagination flex-c-m trans-0-4 active-pagination disabled"><?php echo $i ?></a>
                     <?php }?>
                         <?php if($current_page!=$i){ ?>
-                    <a href="<?php echo base_url().'product/category/'.$category.'/page-'.$i ?>" class="item-pagination flex-c-m trans-0-4"><?php echo $i ?></a>
+                    <a href="<?php echo base_url().'product/category/'.$category.'?sort='.$sort.'&page='.$i ?>" class="item-pagination flex-c-m trans-0-4"><?php echo $i ?></a>
                         <?php }}?>
                 </div>
+                <?php }?>
+                    <?php if($sort=='default-sort') { ?>
+                        <div class="pagination flex-m flex-w p-t-26">
+                            <?php for($i=1;$i<=$total_page;$i++){ ?>
+                                <?php if($current_page == $i){ ?>
+                                    <a href="<?php echo base_url().'product/category/'.$category.'?page='.$i ?>" class="item-pagination flex-c-m trans-0-4 active-pagination disabled"><?php echo $i ?></a>
+                                <?php }?>
+                                <?php if($current_page!=$i){ ?>
+                                    <a href="<?php echo base_url().'product/category/'.$category.'?page='.$i ?>" class="item-pagination flex-c-m trans-0-4"><?php echo $i ?></a>
+                                <?php }}?>
+                        </div>
+                    <?php }?>
                 <?php }?>
             </div>
         </div>

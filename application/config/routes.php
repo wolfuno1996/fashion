@@ -54,7 +54,7 @@ $route['default_controller'] = 'Home';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
-$route['product'] = 'Product/index/1';
+$route['product'] = 'Product/index';
 // Category
 //$route['product/category/(:any)/(:num)'] = 'Product/filter_Cate/$1/$2';
 
@@ -62,10 +62,8 @@ $route['product'] = 'Product/index/1';
 $route['product/category/(:any)/search-(:any)'] = 'Product/searchProduct/$1/$2';
 
 //Filter Product
-$route['product/category/(:any)/page-(:num)'] = 'Product/filter_Cate/$1/$2';
-$route['product/category/(:any)'] = 'Product/filter_Cate/$1/1';
+$route['product/category/(:any)'] = 'Product/filter_Cate/$1';
 $route['product/(:any)/(:any)/(:any)'] = 'Product/filter_all/$1/$2/$3';
-$route['product/category/filter'] = 'Product/filter_all';
+
 
 //Search Product
-$route['product/category/(:any)/search-(:any)'] = 'Product/searchProduct/$1/$2';

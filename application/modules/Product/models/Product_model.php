@@ -17,9 +17,10 @@ class Product_model extends CI_Model{
         return $total_category = $this->db->get('category')->result_array();
     }
 
-    public function getData($current_page){
+    public function getData($current_page,$sort){
         //Phân trang Product
-        $limit = 2;
+
+        $limit = 3;
         $this->db->select('*');
         $data =  $this->db->get('product') ->result_array();
         $total_record = $this->count_record($data);
@@ -32,27 +33,43 @@ class Product_model extends CI_Model{
         $start = ($current_page-1) * $limit;
         //Select lần nữa
         $this->db->select('*');
+        if($sort=="price-asc"){
+            $this->db->order_by('price','ASC');
+        }
+        if($sort=='price-desc'){
+            $this->db->order_by('price','DESC');
+        }
         $dulieu=  $this->db->get('product',$limit,$start) ->result_array();
 
 
         $total_category = $this->getAllCategory();
 
         //Chuyển data về controller
+
         return array(
-            '$total_category' => $total_category,
+            'limit' => $limit,
+            'total_record' => $total_record,
+            'total_category' => $total_category,
             'dulieu' => $dulieu,
-            'total_page'=> $total_page
+            'total_page'=> $total_page,
+            'sort'=>$sort
         );
 
 
     }
-    public function getDataFromCategory($category,$current_page){
+    public function getDataFromCategory($category,$current_page,$sort){
         //Phân trang Product
         $limit = 2;
         $this->db->select('product.name,product.price,product.color,product.content,product.img');
         $this->db->from('product');
         $this->db->join('category','category.id_category=product.id_category');
         $this->db->where('category.name',$category);
+        if($sort=="price-asc"){
+            $this->db->order_by('price','ASC');
+        }
+        if($sort=='price-desc'){
+            $this->db->order_by('price','DESC');
+        }
         //$this->db->where('id_category',$category) ;
         $data = $this->db->get()-> result_array();
         $total_record = $this->count_record($data);
@@ -69,19 +86,30 @@ class Product_model extends CI_Model{
         $this->db->join('category','category.id_category=product.id_category');
         $this->db->where('category.name',$category);
         $this->db->limit($limit,$start);
+        if($sort=="price-asc"){
+            $this->db->order_by('price','ASC');
+        }
+        if($sort=='price-desc'){
+            $this->db->order_by('price','DESC');
+        }
         $dulieu = $this->db->get()-> result_array();
 
         //Show Categories
         $total_category = $this->getAllCategory();
 
         return array(
-            '$total_category' => $total_category,
+            'limit' => $limit,
+            'total_record' => $total_record,
+            'total_category' => $total_category,
             'dulieu' => $dulieu,
-            'total_page'=> $total_page
+            'total_page'=> $total_page,
+            'sort'=>$sort
         );
     }
 
     public function getDataFromFilter($category, $price, $color){
+        //Show Categories
+        $total_category = $this->getAllCategory();
         $min_price = $price[0];
         $max_price = $price[1];
         if($category=="all"){
@@ -89,12 +117,12 @@ class Product_model extends CI_Model{
                 $this->db->select('*');
                 $this->db->where("price BETWEEN $min_price and $max_price");
                 $this->db->where_in("color",$color);
-                return $this->db->get('product')->result_array();
+                $dulieu = $this->db->get('product')->result_array();
             }
             else{
                 $this->db->select('*');
                 $this->db->where("price BETWEEN $min_price and $max_price");
-                return $this->db->get('product')->result_array();
+                $dulieu = $this->db->get('product')->result_array();
             }
         }
         else{
@@ -105,7 +133,7 @@ class Product_model extends CI_Model{
                 $this->db->where('category.name',$category);
                 $this->db->where("price BETWEEN $min_price and $max_price");
                 $this->db->where_in("color",$color);
-                return $this->db->get()->result_array();
+                $dulieu = $this->db->get()->result_array();
             }
             else{
                 $this->db->select('product.name,product.price,product.color,product.img');
@@ -113,9 +141,14 @@ class Product_model extends CI_Model{
                 $this->db->join('category','category.id_category=product.id_category');
                 $this->db->where('category.name',$category);
                 $this->db->where("price BETWEEN $min_price and $max_price");
-                return $this->db->get()->result_array();
+                $dulieu = $this->db->get()->result_array();
             }
         }
+
+        return array(
+            'total_category' => $total_category,
+            'dulieu' => $dulieu,
+        );
     }
 
     public function searchProductWithKey($category,$key_word){
@@ -127,7 +160,7 @@ class Product_model extends CI_Model{
 
             //Chuyển data về controller
             return array(
-                '$total_category' => $total_category,
+                'total_category' => $total_category,
                 'dulieu' => $dulieu,
                 'key_word'=>$key_word
             );
@@ -143,7 +176,7 @@ class Product_model extends CI_Model{
 
             //Chuyển data về controller
             return array(
-                '$total_category' => $total_category,
+                'total_category' => $total_category,
                 'dulieu' => $dulieu,
                 'key_word'=>$key_word
             );
