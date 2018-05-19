@@ -182,4 +182,16 @@ class Product_model extends CI_Model{
             );
         }
     }
+
+    public function getDetailProductWithID($id){
+        $this->db->select('product.name,product.price,product.color,product.img,product.content,category.name as category,product.thumb_img');
+        $this->db->from('product');
+        $this->db->join('category','category.id_category=product.id_category');
+        $this->db->where('product.id',$id);
+        $dulieu = $this->db->get()->result_array();
+        $thumb_img = $dulieu[0]['thumb_img'];
+        $thumb_img = explode(',',$thumb_img);
+        $dulieu[0]['thumb_img']= $thumb_img;
+        return $dulieu;
+    }
 }

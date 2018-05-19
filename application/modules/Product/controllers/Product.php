@@ -34,7 +34,6 @@ class Product extends CI_Controller{
             $sort='default-sort';
         }
         if($category=='all'){
-
             $query = $this->Product_model->getData($page,$sort);
             $data['product'] = $query['dulieu'];
             $data['total_page'] = $query['total_page'];
@@ -91,6 +90,13 @@ class Product extends CI_Controller{
         $data['category'] = $category;
         $data['total_category'] = $query['total_category'];
         $this->load->view('Product_view',$data);
+    }
+
+    public function getDetailProduct($id){
+        $query = $this->Product_model->getDetailProductWithID($id);
+        $data['product'] = $query;
+
+        $this->load->view('ProductDetail_view',$data);
     }
 
 }

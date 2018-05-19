@@ -45,7 +45,7 @@ function filterProduct(){
         price = btoa(price);
 
         setTimeout(function () {
-            window.location.replace(BASE_URL+category+'/'+price+'/'+color);
+            window.location.replace(BASE_URL+'filter/'+category+'/'+price+'/'+color);
         },1000);
         
 }
@@ -67,7 +67,7 @@ jQuery(document).ready(function () {
                 htmlSort = "Default Sorting";
                 $('select#selection-sort option[value="default-sort"]').attr("selected","selected");
                 break;
-        case 'price-asc':
+            case 'price-asc':
             htmlSort = 'Price: low to high';
             $('select#selection-sort option[value="price-asc"]').attr("selected","selected");
             break;
@@ -76,12 +76,13 @@ jQuery(document).ready(function () {
             htmlSort = 'Price: high to low';
                 $('select#selection-sort option[value="price-desc"]').attr("selected","selected");
             break;
-    }
 
+        }
     setTimeout(function () {
-        valueSort = jQuery('input#sort').val();
-        $('#select2-selection-sort-container').html(htmlSort);
-
+        if(jQuery('input#sort').val()) {
+            valueSort = jQuery('input#sort').val();
+            $('#select2-selection-sort-container').html(htmlSort);
+        }
     },100);
 })
     
