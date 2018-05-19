@@ -166,7 +166,7 @@ class Product_model extends CI_Model{
             );
         }
         else{
-            $this->db->select('product.name,product.price,product.color,product.img');
+            $this->db->select('product.id,product.name,product.price,product.color,product.img');
             $this->db->from('product');
             $this->db->join('category','category.id_category=product.id_category');
             $this->db->where('category.name',$category);
@@ -184,6 +184,7 @@ class Product_model extends CI_Model{
     }
 
     public function getDetailProductWithID($id){
+        //Show Product with ID
         $this->db->select('product.name,product.price,product.color,product.img,product.content,category.name as category,product.thumb_img');
         $this->db->from('product');
         $this->db->join('category','category.id_category=product.id_category');
@@ -192,6 +193,20 @@ class Product_model extends CI_Model{
         $thumb_img = $dulieu[0]['thumb_img'];
         $thumb_img = explode(',',$thumb_img);
         $dulieu[0]['thumb_img']= $thumb_img;
-        return $dulieu;
+
+        //Show Related Product
+        $this->db->select('product.id_category')->from('product')->where('product.id',$id);
+        $sub_query = $this->db->get_compiled_select();
+
+        $this->db->select('product.id,product.name,product.price,product.img,category.name as category,product.id_category');
+        $this->db->from('product');
+        $this->db->join('category','category.id_category=product.id_category');
+        //$this->db->where('product.id !=',$id);
+        //$this->db->where("category.id_category IN ($sub_query)",null,false);
+        $related_product = $this->db->get()->result_array();
+        return array(
+            'dulieu' => $dulieu,
+            'related_product' => $related_product
+        );
     }
 }

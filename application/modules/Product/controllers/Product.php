@@ -94,7 +94,9 @@ class Product extends CI_Controller{
 
     public function getDetailProduct($id){
         $query = $this->Product_model->getDetailProductWithID($id);
-        $data['product'] = $query;
+        $data['product'] = $query['dulieu'];
+        $data['related_product'] = $query['related_product'];
+
 
         $this->load->view('ProductDetail_view',$data);
     }
