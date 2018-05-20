@@ -81,7 +81,7 @@ class Product_model extends CI_Model{
         }
         $start = ($current_page-1) * $limit;
         //Select lần nữa
-        $this->db->select('product.name,product.price,product.color,product.content,product.img');
+        $this->db->select('product.id,product.name,product.price,product.color,product.content,product.img');
         $this->db->from('product');
         $this->db->join('category','category.id_category=product.id_category');
         $this->db->where('category.name',$category);

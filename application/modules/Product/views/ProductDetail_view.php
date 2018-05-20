@@ -1,9 +1,9 @@
 <?php include('pages/header.php') ?>
-
+<?php include('pages/Funtions.php') ?>
 <!-- breadcrumb -->
 <?php foreach ($product as $one_Product) { ?>
 <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-    <a href="index.html" class="s-text16">
+    <a href="<?php echo base_url() ?>" class="s-text16">
         Home
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
@@ -189,7 +189,7 @@
                         </div>
 
                         <div class="block2-txt p-t-20">
-                            <a href="<?php echo base_url() ?>product/detail-id=<?php echo $one_relatedProduct['id']  ?>" class="block2-name dis-block s-text3 p-b-5">
+                            <a href="<?php echo base_url()?>product/<?php echo utf8convert($one_relatedProduct['name']); ?>-id=<?php echo $one_relatedProduct['id'] ?>" class="block2-name dis-block s-text3 p-b-5">
                                 <?php echo $one_relatedProduct['name'] ?>
                             </a>
 

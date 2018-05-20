@@ -1,4 +1,5 @@
 <?php include('pages/header.php') ?>
+<?php include('pages/Funtions.php') ?>
 
 
 <!-- Content page -->
@@ -197,7 +198,7 @@
                             </div>
 
                             <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                <a href="<?php echo base_url()?>product/<?php echo utf8convert($item['name']); ?>-id=<?php echo $item['id'] ?>" class="block2-name dis-block s-text3 p-b-5">
                                     <?php echo $item['name'] ?>
                                 </a>
 
