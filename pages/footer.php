@@ -253,6 +253,23 @@
 <!--===============================================================================================-->
 <script src="<?php echo base_url()?>assets/js/main.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/1.js"></script>
-
+<!--Add Product to Cart-->
+<script type="text/javascript">
+    // Ajax post
+    function add_cart(id) {
+        jQuery.ajax({
+            type: "POST",
+            url: "<?php echo base_url()?>" + "cart/insert",
+            dataType: 'json',
+            data: {id: id},
+            success: function(res) {
+                if (res)
+                {
+                    console.log(res);
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

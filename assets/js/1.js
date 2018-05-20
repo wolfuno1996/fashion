@@ -60,6 +60,7 @@ function searchProduct() {
     },1000);
 }
 
+
 jQuery(document).ready(function () {
 
     switch(jQuery('input#sort').val()){
@@ -84,5 +85,7 @@ jQuery(document).ready(function () {
             $('#select2-selection-sort-container').html(htmlSort);
         }
     },100);
+
+
 })
     
