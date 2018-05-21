@@ -11,7 +11,7 @@ class Cart_model extends CI_Model{
     public function getData($id){
 
 
-        $this->db->select('id,name,price');
+        $this->db->select('id,name,price,img');
         $this->db->from('product');
         $this->db->where('id',$id);
         $dulieu = $this->db->get()->result_array();

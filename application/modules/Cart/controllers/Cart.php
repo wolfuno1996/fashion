@@ -47,4 +47,26 @@ class Cart extends CI_Controller {
         }
         redirect('cart');
     }
+
+    public function delete(){
+        $rowID = $_POST['rowID'];
+
+        if($rowID=='all'){
+            $this->cart->destroy();
+        }
+        else{
+            $data = array(
+                'rowid' => $rowID,
+                'qty' => 0
+            );
+            if($this->cart->update($data)){
+                echo "Success";
+            }
+            else{
+                echo "Fail";
+            }
+
+
+        }
+    }
 }

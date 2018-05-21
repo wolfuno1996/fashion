@@ -255,21 +255,44 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/1.js"></script>
 <!--Add Product to Cart-->
 <script type="text/javascript">
-    // Ajax post
-    function add_cart(id) {
-        jQuery.ajax({
-            type: "POST",
-            url: "<?php echo base_url()?>" + "cart/insert",
-            dataType: 'json',
-            data: {id: id},
-            success: function(res) {
-                if (res)
-                {
-                    console.log(res);
+
+
+        // Add Cart With Ajax
+        function add_cart(id) {
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo base_url()?>" + "cart/insert",
+                dataType: 'json',
+                data: {id: id},
+                success: function (res) {
+                    if (res) {
+                        console.log(res);
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
+
+        //Delete Cart with Ajax
+        var ajaxDelete = jQuery('div.cart-img-product').click(function () {
+            var parentOneCart = jQuery(this).parent().parent();
+            var rowID = jQuery(this).children('input#rowid-cart').val();
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo base_url()?>" + "cart/delete",
+                dataType: 'json',
+                data: {rowID: rowID}
+            }).done(function() {
+                //alert( "success" );
+            }).fail(function() {
+                //alert( "error" );
+            }).always(function(res) {
+                console.log(res);
+            });
+
+
+        })
+       /* parentOneCart.remove();
+        console.log(res);*/
 </script>
 </body>
 </html>

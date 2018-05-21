@@ -28,7 +28,8 @@
                     <tr class="table-row">
                         <td class="column-1">
                             <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="images/item-05.jpg" alt="IMG-PRODUCT">
+                                <img src="<?php echo base_url()?>assets/images/products/<?php echo $one_cart['img'] ?>"  alt="IMG-PRODUCT">
+                                <input id="rowid-cart" type="hidden" value="<?php echo $one_cart['rowid'] ?>">
                             </div>
                         </td>
                         <td class="column-2"><?php echo $one_cart['name'] ?></td>
@@ -140,7 +141,7 @@
 					</span>
 
                 <span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						$<?php echo number_format($grand_total); ?>
 					</span>
             </div>
 
