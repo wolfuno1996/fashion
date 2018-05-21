@@ -60,7 +60,8 @@ class Cart extends CI_Controller {
                 'qty' => 0
             );
             if($this->cart->update($data)){
-                echo "Success";
+                $kq = "Success";
+                echo json_encode($kq);
             }
             else{
                 echo "Fail";

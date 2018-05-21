@@ -272,27 +272,46 @@
             });
         }
 
-        //Delete Cart with Ajax
-        var ajaxDelete = jQuery('div.cart-img-product').click(function () {
+        //Delete 1 Cart with Ajax
+        var cartDelete = jQuery('div.cart-img-product').click(function () {
             var parentOneCart = jQuery(this).parent().parent();
             var rowID = jQuery(this).children('input#rowid-cart').val();
-            jQuery.ajax({
+            $.ajax({
                 type: "POST",
                 url: "<?php echo base_url()?>" + "cart/delete",
                 dataType: 'json',
                 data: {rowID: rowID}
             }).done(function() {
-                //alert( "success" );
+
             }).fail(function() {
-                //alert( "error" );
+
             }).always(function(res) {
                 console.log(res);
+                parentOneCart.remove();
             });
-
-
         })
-       /* parentOneCart.remove();
-        console.log(res);*/
+        // Delete All Cart
+        function deleteAllCart() {
+            var parentOneCart = jQuery(this).parent().parent();
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo base_url()?>" + "cart/delete",
+                dataType: 'json',
+                data: {rowID: 'all'}
+            }).done(function() {
+
+            }).fail(function() {
+
+            }).always(function(res) {
+
+            });
+        }
+
+
+
+
+
+
 </script>
 </body>
 </html>
