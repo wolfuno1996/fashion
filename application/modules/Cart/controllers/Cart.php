@@ -11,7 +11,7 @@ class Cart extends CI_Controller {
     }
 
     public function index(){
-
+        $_SESSION['menu'] = 'cart';
         $dulieu['cart'] = $this->cart->contents();
         $this->load->view('Cart_view',$dulieu);
 

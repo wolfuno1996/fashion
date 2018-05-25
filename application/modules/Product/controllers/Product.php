@@ -8,6 +8,7 @@ class Product extends CI_Controller{
         $this->load->model('Product_model');
     }
     public function index(){
+        $_SESSION['menu'] = 'product';
         $page = 1;
         $sort = $this->input->get('sort');
         if(!isset($sort)){

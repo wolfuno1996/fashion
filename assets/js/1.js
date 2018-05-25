@@ -87,7 +87,7 @@ jQuery(document).ready(function () {
     },100);
 
     //Confirm refresh page when insert a product to Cart
-    jQuery(document).on('click','.swal-button--confirm',function (ư) {
+    jQuery(document).on('click','.swal-button--confirm',function () {
         var url = window.location.href;
         window.location = url;
     })

@@ -76,37 +76,23 @@ fashe@example.com
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li>
-                            <a href="index.html">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
+                        <li <?php if($_SESSION['menu'] == "home"){echo 'class="sale-noti"';} ?>>
+                            <a href="<?php echo base_url()?>">Home</a>
                         </li>
 
-                        <li>
-                            <a href="product.html">Shop</a>
+                        <li <?php if($_SESSION['menu'] == "product"){echo 'class="sale-noti"';} ?>>
+                            <a href="<?php echo base_url().'product'?>">Shop</a>
                         </li>
 
-                        <li class="sale-noti">
-                            <a href="product.html">Sale</a>
+                        <li <?php if($_SESSION['menu'] == "cart"){echo 'class="sale-noti"';} ?>>
+                            <a href="<?php echo base_url().'cart'?>">Cart</a>
+                        </li>
+                        <li <?php if($_SESSION['menu'] == "about"){echo 'class="sale-noti"';} ?>>
+                            <a href="<?php echo base_url().'about'?>">About</a>
                         </li>
 
-                        <li>
-                            <a href="cart.html">Features</a>
-                        </li>
-
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-
-                        <li>
-                            <a href="contact.html">Contact</a>
+                        <li <?php if($_SESSION['menu'] == "contact"){echo 'class="sale-noti"';} ?>>
+                            <a href="<?php echo base_url().'contact'?>">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -142,7 +128,7 @@ fashe@example.com
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
                                     <img src="<?php echo base_url()?>assets/images/products/<?php echo $one_cart['img'] ?>" alt="IMG">
-                                    <input id="" type="hidden" value="<?php echo $one_cart['rowid'] ?>">
+                                    <input id="rowid-cart" type="hidden" value="<?php echo $one_cart['rowid'] ?>">
                                 </div>
 
                                 <div class="header-cart-item-txt">
@@ -166,7 +152,7 @@ Total $<?php if(isset($_SESSION['cart_contents'])){echo $_SESSION['cart_contents
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="<?php echo base_url()."cart" ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 View Cart
 </a>
                             </div>

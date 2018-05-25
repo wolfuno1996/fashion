@@ -68,6 +68,7 @@ $route['product/filter/(:any)/(:any)/(:any)'] = 'Product/filter_all/$1/$2/$3';
 //Product Details
 $route['product/(:any)-id=(:num)'] = 'Product/getDetailProduct/$2';
 
-$route['cart'] = 'Cart/index';
+
 $route['cart/insert'] = 'Cart/insert';
+
 

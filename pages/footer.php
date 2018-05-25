@@ -296,8 +296,7 @@
         })
 
         //Delete 1 Cart with Ajax in header.php
-        var cartDelete = jQuery('div.cart-img-product').click(function () {
-            var parentOneCart = jQuery(this).parent().parent();
+        var cartDelete = jQuery('div.header-cart-item-img').click(function () {
             var rowID = jQuery(this).children('input#rowid-cart').val();
             $.ajax({
                 type: "POST",
