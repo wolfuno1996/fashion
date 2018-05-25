@@ -14,6 +14,15 @@
                         <th class="column-4 p-l-70">Quantity</th>
                         <th class="column-5">Total</th>
                     </tr>
+                    <?php if(!isset($_SESSION['cart_contents'])){ ?>
+                    <tr class="table-row">
+                        <td class="column-1"></td>
+                        <td class="column-2" style="color: red">Giỏ hàng của bạn hiện đang trống</td>
+                        <td class="column-3"></td>
+                        <td class="column-4"></td>
+                        <td class="column-5"></td>
+                    </tr>
+                    <?php }?>
                     <?php
                         echo form_open('cart/update_cart');
                         $grand_total = 0;
@@ -125,7 +134,7 @@
 
                     <div class="size14 trans-0-4 m-b-10">
                         <!-- Button -->
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                        <button onclick="test1()" type="button" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                             Update Totals
                         </button>
                     </div>

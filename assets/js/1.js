@@ -61,6 +61,7 @@ function searchProduct() {
 }
 
 
+
 jQuery(document).ready(function () {
 
     switch(jQuery('input#sort').val()){
@@ -77,7 +78,6 @@ jQuery(document).ready(function () {
             htmlSort = 'Price: high to low';
                 $('select#selection-sort option[value="price-desc"]').attr("selected","selected");
             break;
-
         }
     setTimeout(function () {
         if(jQuery('input#sort').val()) {
@@ -85,6 +85,12 @@ jQuery(document).ready(function () {
             $('#select2-selection-sort-container').html(htmlSort);
         }
     },100);
+
+    //Confirm refresh page when insert a product to Cart
+    jQuery(document).on('click','.swal-button--confirm',function (ư) {
+        var url = window.location.href;
+        window.location = url;
+    })
 
 })
     

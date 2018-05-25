@@ -266,7 +266,8 @@
                 data: {id: id},
                 success: function (res) {
                     if (res) {
-                        console.log(res);
+
+
                     }
                 }
             });
@@ -287,9 +288,35 @@
 
             }).always(function(res) {
                 console.log(res);
-                parentOneCart.remove();
+                if(res=="Success"){
+                    var url = window.location.href;
+                    window.location = url;
+                }
             });
         })
+
+        //Delete 1 Cart with Ajax in header.php
+        var cartDelete = jQuery('div.cart-img-product').click(function () {
+            var parentOneCart = jQuery(this).parent().parent();
+            var rowID = jQuery(this).children('input#rowid-cart').val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url()?>" + "cart/delete",
+                dataType: 'json',
+                data: {rowID: rowID}
+            }).done(function() {
+
+            }).fail(function() {
+
+            }).always(function(res) {
+                console.log(res);
+                if(res=="Success"){
+                    var url = window.location.href;
+                    window.location = url;
+                }
+            });
+        })
+
         // Delete All Cart
         function deleteAllCart() {
             var parentOneCart = jQuery(this).parent().parent();

@@ -17,11 +17,16 @@ class Cart extends CI_Controller {
 
     }
 
+    public function show(){
+        $dulieu = $this->cart->contents();
+        echo json_encode($dulieu);
+    }
+
     public function insert(){
         $id = $this->input->post('id');
         $dulieu = $this->Cart_model->getData($id);
         if($this->cart->insert($dulieu)){
-            echo "Succses";
+            echo 'Success';
         }else{
             echo "Fail";
         }
