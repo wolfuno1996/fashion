@@ -62,6 +62,8 @@ function searchProduct() {
 
 
 
+
+
 jQuery(document).ready(function () {
 
     switch(jQuery('input#sort').val()){
